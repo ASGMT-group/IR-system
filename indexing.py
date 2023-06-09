@@ -11,10 +11,14 @@ from nltk.corpus import stopwords
 
 def extract_file(folder_path):
     files =[]
+    file_dictionary = {}
+    file_no = 1
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
+        file_dictionary[file_no] = file_path
         files.append(file_path)
-    return (files)
+        file_no +=1
+    return (files, file_dictionary)
 def get_file_type(path):
     _, file_extention = os.path.splitext(path)
     if file_extention == '.txt':
@@ -35,7 +39,8 @@ def tokenizer(files):
     # elif type == 'word':
     #     doc = Document(files)
     #     text = ' '.join([paragraph.text for paragraph in doc.paragraphs ])
-    #     tokens = word_tokenize(text)
+    #     tokens = word_tokenize(text)        doc_id+=1
+
     #     return tokens
     elif type == 'pdf':
         with pdfplumber.open(files) as pdf:
@@ -43,15 +48,16 @@ def tokenizer(files):
             for page in pdf.pages:
                 text+=page.extract_text()
             
-        tokens = word_tokenize(text)
+        tokens = word_tokenize(text) + [ str(files) ]
         return tokens
     else :
         return '!!!  invalid file type please enter only text | pdf | word files'
     
-def tokenize(folder_path):
-    files = extract_file(folder_path)
+def tokenize(files):
     token_list = []
+    file_number = 1
     for file in files:
+
         token_list.append(tokenizer(file))
     return token_list
 
@@ -59,10 +65,10 @@ def tokenize(folder_path):
 # ---------------------stemmer----------------------------
 
 
-def stemm(folder_path):
-
+def stemm(files):
+    
     # before stemmming first we have to tokenizw the words
-    token_list = tokenize(folder_path)
+    token_list = tokenize(files)
 
     # the token list is to dimentional list
     stemmer = PorterStemmer()
@@ -78,11 +84,12 @@ def stemm(folder_path):
 
 
 #-------------------------stopword removal---------------------------
-def stopword_removal(folder_path):
+def stopword_removal(files):
     # we used the out put of the stemmint 
     # nltk.download('punkt')
     # nltk.download('stopwords')
-    sw_list = stemm(folder_path)
+    #files,file_dictionary = extract_file(folder_path)
+    sw_list = stemm(files)
     stop_words = set(stopwords.words('english'))
     result = []
     for lists in sw_list:
@@ -91,11 +98,24 @@ def stopword_removal(folder_path):
             if i.casefold() not in stop_words and len(i)>1:
                 lis.append(i)
         result.append(lis)
+    #print(result)
     return result
-x = stopword_removal('docs')
-for i in x:
-    for j in i:
-        print(j)
 
+def inverted_file(folder_path):
+    files, file_dictionary = extract_file(folder_path)
+    final_index_list = stopword_removal(files)
+    invertd_term_list =[]
+    doc_id = 1
+    for i in final_index_list:
+        for j in i:
+            invertd_term_list.append(j+ " " + str(doc_id))
+        doc_id+=1
+    return(invertd_term_list, file_dictionary)
+
+x,y = inverted_file('docs/')
+for i in x:
+    print(i)
+
+print(y)
 
 
