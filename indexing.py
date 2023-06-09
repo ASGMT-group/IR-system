@@ -101,21 +101,27 @@ def stopword_removal(files):
     #print(result)
     return result
 
-def inverted_file(folder_path):
+def vocabulary_file(folder_path):
     files, file_dictionary = extract_file(folder_path)
     final_index_list = stopword_removal(files)
     invertd_term_list =[]
     doc_id = 1
     for i in final_index_list:
         for j in i:
-            invertd_term_list.append(j+ " " + str(doc_id))
+            freq = i.count(j)
+            invertd_term_list.append(j+ " " + str(doc_id) + " " + str(freq))
         doc_id+=1
-    return(invertd_term_list, file_dictionary)
+    result = list(set(invertd_term_list))
+    return(sorted(result), file_dictionary)
 
-x,y = inverted_file('docs/')
+x,y= vocabulary_file('docs/')
 for i in x:
     print(i)
 
-print(y)
+
+
+
+
+
 
 
