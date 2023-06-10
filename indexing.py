@@ -8,6 +8,7 @@ from nltk.corpus import stopwords
 
 #-----------tokenizer--------------------------------------------------------------------
 
+# --------------this function is defined to extarct document from folder containing the document collection
 
 def extract_file(folder_path):
     files =[]
@@ -19,6 +20,9 @@ def extract_file(folder_path):
         files.append(file_path)
         file_no +=1
     return (files, file_dictionary)
+
+# -   ------as the program is designed to operate on multiple documents this function determines the file type of each doc
+
 def get_file_type(path):
     _, file_extention = os.path.splitext(path)
     if file_extention == '.txt':
@@ -29,6 +33,9 @@ def get_file_type(path):
         return 'pdf'
     else :
         return 'unsupported file'
+# ----this function tokeizes a document------------------------
+
+
 def tokenizer(files):
     type = get_file_type(files)
     if type== 'text':
@@ -70,7 +77,7 @@ def stemm(files):
     # before stemmming first we have to tokenizw the words
     token_list = tokenize(files)
 
-    # the token list is to dimentional list
+    # the token list is two dimentional list
     stemmer = PorterStemmer()
 
     stemmed_word_list=[]
@@ -88,7 +95,7 @@ def stopword_removal(files):
     # we used the out put of the stemmint 
     # nltk.download('punkt')
     # nltk.download('stopwords')
-    #files,file_dictionary = extract_file(folder_path)
+
     sw_list = stemm(files)
     stop_words = set(stopwords.words('english'))
     result = []
@@ -115,9 +122,14 @@ def vocabulary_file(folder_path):
     return(sorted(result), file_dictionary)
 
 x,y= vocabulary_file('docs/')
+file = open('ivserted.txt','w')
+file.write (("{:<15} {:<8} {}".format('indecx_term ', 'DOC#','Frequency'))+'\n\n')
 for i in x:
-    print(i)
+    content= "{:<15} {:<8} {}".format(i.split()[0], i.split()[1], i.split()[2])
+    file.write(content+"\n")
 
+file.close()
+#--------------------------TF-IDF-------------------------------------
 
 
 
