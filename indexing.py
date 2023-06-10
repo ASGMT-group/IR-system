@@ -14,7 +14,7 @@ def extract_file(folder_path):
     files =[]
     file_dictionary = {}
     file_no = 1
-    for filename in os.listdir(folder_path):
+    for filename in sorted(os.listdir(folder_path)):
         file_path = os.path.join(folder_path, filename)
         file_dictionary[file_no] = file_path
         files.append(file_path)
@@ -99,10 +99,11 @@ def stopword_removal(files):
     sw_list = stemm(files)
     stop_words = set(stopwords.words('english'))
     result = []
+    l = ["''","``","'s"]
     for lists in sw_list:
         lis = []
         for i in lists:
-            if i.casefold() not in stop_words and len(i)>1:
+            if (i.casefold() not in stop_words) and (len(i)>1) and (i.casefold() not in l):
                 lis.append(i)
         result.append(lis)
     #print(result)
@@ -121,16 +122,47 @@ def vocabulary_file(folder_path):
     result = list(set(invertd_term_list))
     return(sorted(result), file_dictionary)
 
+
+
+def find_character_location(file_path, character):
+    with open(file_path, 'r') as file:
+        content = file.read()
+        index = content.find(character)  # Using the 'find()' function
+        return index
+def searcher(file_path, character):
+    with open(file_path, 'r') as file:
+        content = file.read()
+        if character in content:
+            return 1
+        else :
+            return 0 # Using the 'find()' function
+
+# this block writes the vocabulary file --------------------------------------------
 x,y= vocabulary_file('docs/')
-file = open('ivserted.txt','w')
-file.write (("{:<15} {:<8} {}".format('indecx_term ', 'DOC#','Frequency'))+'\n\n')
+file = open('inverted.txt','w')
+file.write (("{:<15} {:<8} {:<8} {:<15}".format('indecx_term', 'DOC#','Freq','location'))+'\n\n')
 for i in x:
-    content= "{:<15} {:<8} {}".format(i.split()[0], i.split()[1], i.split()[2])
+    z=i.split()
+    location = find_character_location(y[int(z[1])],z[0])
+    content= "{:<15} {:<8} {:<8} {:<15}".format(i.split()[0], i.split()[1], i.split()[2],location)
     file.write(content+"\n")
+    
 
 file.close()
-#--------------------------TF-IDF-------------------------------------
+#  ---------------------------constructiong vector space model------------------------------------------------------------------------------
+query = input().strip()
+query_items = query.split()
 
+file = open ('vectorspace.txt','w')
+file.write (("{:<15} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} ".format('indecx_term', 'D1','D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12'))+'\n\n')
+for term in query_items:
+    l=[]
+    for i in range(len(y)):
+        l.append(searcher(y[i+1], term)) 
+    file.write ("{:<15} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} {:<3} ".format(term, l[0],l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10],l[11]))
+    file.write('\n')
+#--------------------------TF-IDF-------------------------------------
+file.close()
 
 
 

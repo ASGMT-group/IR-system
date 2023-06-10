@@ -2,20 +2,3 @@ AI, or Artificial Intelligence, refers to the simulation of human intelligence i
 
 There are two types of AI: Narrow AI and General AI.
 
-1. Narrow AI (also known as Weak AI): Narrow AI refers to AI systems that are designed to perform specific tasks within a limited domain. These systems are trained to excel in a particular area, such as speech recognition, image classification, or playing chess. Narrow AI is prevalent in our daily lives, powering virtual assistants like Siri and Alexa, recommendation algorithms on streaming platforms, and autonomous vehicles.
-
-2. General AI (also known as Strong AI): General AI refers to AI systems that possess the ability to understand, learn, and apply knowledge across various domains, similar to human intelligence. General AI aims to replicate human cognitive abilities, including reasoning, problem-solving, and emotional intelligence. While General AI remains a subject of ongoing research and development, scientists and experts are still working on creating machines that can achieve this level of intelligence.
-
-AI systems are built using various techniques and algorithms, including:
-
-1. Machine Learning (ML): Machine Learning involves training AI systems using large amounts of data, allowing them to learn patterns, make predictions, and make decisions without explicit programming. ML techniques include supervised learning, unsupervised learning, and reinforcement learning.
-
-2. Deep Learning: Deep Learning is a subfield of ML that uses artificial neural networks with multiple layers to model and understand complex patterns in data. Deep Learning has proven to be highly effective in tasks such as image and speech recognition.
-
-3. Natural Language Processing (NLP): NLP focuses on enabling machines to understand, interpret, and generate human language. It is used in applications like language translation, chatbots, and sentiment analysis.
-
-4. Computer Vision: Computer Vision involves training machines to understand and interpret visual information from images and videos. It is used in various applications, including object recognition, image classification, and autonomous vehicles.
-
-AI has the potential to revolutionize various industries and sectors, including healthcare, finance, transportation, manufacturing, and more. It can enhance productivity, improve decision-making, automate repetitive tasks, and provide personalized experiences. However, AI also presents challenges and considerations such as ethical concerns, bias in algorithms, privacy issues, and the impact on employment.
-
-To ensure the responsible development and deployment of AI, ethical frameworks and regulations are being developed to address these concerns and promote transparency, fairness, and accountability in AI systems.
