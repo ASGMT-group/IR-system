@@ -62,7 +62,6 @@ def tokenizer(files):
     
 def tokenize(files):
     token_list = []
-    file_number = 1
     for file in files:
 
         token_list.append(tokenizer(file))
@@ -129,13 +128,15 @@ def find_character_location(file_path, character):
         content = file.read()
         index = content.find(character)  # Using the 'find()' function
         return index
+    
+
 def searcher(file_path, character):
     with open(file_path, 'r') as file:
         content = file.read()
         if character in content:
             return 1
         else :
-            return 0 # Using the 'find()' function
+            return 0  # Using the 'find()' function
 
 # this block writes the vocabulary file --------------------------------------------
 x,y= vocabulary_file('docs/')

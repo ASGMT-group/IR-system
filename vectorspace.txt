@@ -1,7 +1,7 @@
 indecx_term     D1  D2  D3  D4  D5  D6  D7  D8  D9  D10 D11 D12 
 
-what            0   0   0   0   0   0   0   0   0   0   0   0   
-is              1   1   0   1   1   1   1   1   1   1   1   1   
+hello           0   0   0   0   0   0   0   0   0   0   0   0   
 AI              0   1   0   0   0   0   0   0   0   0   1   0   
-in              1   1   1   1   1   1   1   1   1   1   1   1   
-history         0   0   0   0   0   0   0   0   0   0   0   1   
+science         0   1   0   0   0   0   0   0   0   0   0   0   
+hjefi           0   0   0   0   0   0   0   0   0   0   0   0   
+jhiwedi         0   0   0   0   0   0   0   0   0   0   0   0   
