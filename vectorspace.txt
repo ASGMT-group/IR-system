@@ -1,7 +1,4 @@
-indecx_term     D1  D2  D3  D4  D5  D6  D7  D8  D9  D10 D11 D12 
+indecx_term     D1  D2  
 
-hello           0   0   0   0   0   0   0   0   0   0   0   0   
-AI              0   1   0   0   0   0   0   0   0   0   1   0   
-science         0   1   0   0   0   0   0   0   0   0   0   0   
-hjefi           0   0   0   0   0   0   0   0   0   0   0   0   
-jhiwedi         0   0   0   0   0   0   0   0   0   0   0   0   
+love            0   0   
+csec            0   0   
