@@ -5,7 +5,7 @@ import pdfplumber
 from nltk.stem import PorterStemmer
 #from docx import Document
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
+
 # --------------this function is defined to extarct document from folder containing the document collection
 def extract_file(folder_path):
     files = []
@@ -134,19 +134,6 @@ file.close()
 query = input().strip()
 optimized_query = optimize_query(query.split())
 print(optimized_query)
-file = open('vectorspace.txt', 'w')
-file.write(("{:<15} {:<3} {:<3} ".format(
-    'indecx_term', 'D1', 'D2'))+'\n\n')
-for term in optimized_query:
-    l = []
-    for i in range(len(y)):
-        truth = searcher(y[i+1], term)
-        l.append(truth)
-    file.write("{:<15} {:<3} {:<3} ".format(
-        term, l[0], l[1]))
-    file.write('\n')
-# --------------------------TF-IDF-------------------------------------
-file.close()
 #frequency finder ---------------------------------
 def freq_finder(file_path, character):
     with open(file_path, 'r') as file:
@@ -157,6 +144,7 @@ def freq_finder(file_path, character):
             return frequency
         else:
             return 0
+    file.close()
 char_ferq =[]
 for i in range(len(y)):
     CharacterFrequencyMap = {} 
@@ -167,24 +155,16 @@ for i in range(len(y)):
 for i in char_ferq:
     print (i)
 
-nltk.download('stopwords')
-nltk.download('punkt')
+# #TF-IDF constructing vector space model
+# def tf_idf(optimized_query):
+term_list = []
+with open('inverted.txt', 'r') as file:
+    for lint in file:
+        if len(lint.split())>2:
+            term_list.append(lint.split()[0])
 
-def preprocess(documents):
-    stop_words = set(stopwords.words('english'))
-    stemmer = PorterStemmer()
-    preprocessed_documents = []
-    for document in documents:
-        # Tokenize the document
-        tokens = word_tokenize(document.lower())
-        # Remove stop words and perform stemming
-        filtered_tokens = [stemmer.stem(token) for token in tokens if token not in stop_words]
-        # Join the tokens back into a string
-        preprocessed_document = " ".join(filtered_tokens)
-        preprocessed_documents.append(preprocessed_document)
-    return preprocessed_documents
+list_of_inverted =[]
+for i in term_list:
+    for j in range(len(y)):
+        
 
-def build_vsm(documents):
-    vectorizer = TfidfVectorizer()
-    vsm = vectorizer.fit_transform(documents)
-    return vsm, vectorizer.get_feature_names()

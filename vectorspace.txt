@@ -1,4 +1,1 @@
 indecx_term     D1  D2  
-
-love            0   0   
-csec            0   0   
