@@ -163,8 +163,9 @@ with open('inverted.txt', 'r') as file:
         if len(lint.split())>2:
             term_list.append(lint.split()[0])
 
-list_of_inverted =[]
-for i in term_list:
-    for j in range(len(y)):
+# list_of_inverted =[]
+# for i in term_list:
+#     for j in range(len(y)):
         
 
+ 
